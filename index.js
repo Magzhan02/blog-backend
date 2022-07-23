@@ -1,6 +1,8 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import multer from 'multer';
+import cors from 'cors';
+
 import { registerValidation, loginValidation, postCreateValidation } from './validations.js';
 
 import checkAuth from './utils/checkAuth.js';
@@ -23,7 +25,7 @@ mongoose
 
 const app = express();
 
-//
+// получаем изображение
 const storage = multer.diskStorage({
   destination: (_, __, cb) => {
     cb(null, 'uploads');
@@ -41,6 +43,7 @@ app.post('/upload/', checkAuth, upload.single('image'), (request, resp) => {
   });
 });
 
+app.use(cors()); // избавляемся от ошибок CORS
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
