@@ -36,6 +36,7 @@ export const getAllPosts = async (request, resp) => {
     });
   }
 };
+
 // получаем статью по id
 export const getPost = async (request, resp) => {
   try {

@@ -24,6 +24,7 @@ mongoose
   .catch((err) => console.log('MongoDB Error', err));
 
 const app = express();
+app.use(cors()); // избавляемся от ошибок CORS
 
 // получаем изображение
 const storage = multer.diskStorage({
@@ -43,7 +44,6 @@ app.post('/upload/', checkAuth, upload.single('image'), (request, resp) => {
   });
 });
 
-app.use(cors()); // избавляемся от ошибок CORS
 app.use(express.json());
 app.use('/uploads', express.static('uploads'));
 
